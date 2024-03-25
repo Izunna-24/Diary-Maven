@@ -24,7 +24,7 @@ public class DiaryController {
 
     }
 
-    @PostMapping("/sign_in")
+    @PostMapping("/sign_up")
     public String register(@RequestBody RegisterRequest registerRequest){
         try{
             diaryServices.registerWith(registerRequest);
@@ -58,11 +58,11 @@ public class DiaryController {
         }
     }
 
-    @PatchMapping("/update_entry/{id}")
+    @PatchMapping("/update_entry")
     public  String updateEntry(@RequestBody UpdateEntryRequest updateEntry){
         try{
             diaryServices.updateEntry(updateEntry);
-            return String.format("Your entry with id number %d has been created successfully%n");
+            return String.format("Update successful");
 
         }
         catch (DiaryExceptions e){
@@ -70,7 +70,7 @@ public class DiaryController {
         }
     }
 
-    @DeleteMapping("/delete_entry{id}")
+    @DeleteMapping("/delete_entry")
     public  String deleteEntry(@RequestBody DeleteEntryRequest deleteEntry){
         try{
             diaryServices.deleteEntry(deleteEntry);
@@ -93,8 +93,8 @@ public class DiaryController {
         }
     }
 
-    @GetMapping("/findAllEntries")
-    public  String findAllEntries(String username){
+    @GetMapping("/findAllEntries/{author}")
+    public  String findAllEntries(@PathVariable("author") String username){
         try{
             return String.format("Entries of %s%n " + "%s", username, diaryServices.findEntriesByAuthor(username));
 
