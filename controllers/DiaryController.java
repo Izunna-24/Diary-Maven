@@ -3,7 +3,6 @@ package myDiary.controllers;
 import myDiary.dtos.*;
 import myDiary.exceptions.*;
 import myDiary.services.DiaryService;
-import myDiary.services.DiaryServiceImp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +28,7 @@ public class DiaryController {
     public String register(@RequestBody RegisterRequest registerRequest){
         try{
             diaryServices.registerWith(registerRequest);
-            return String.format("Hello %s, your registration was successful!", registerRequest.getUsername());
+            return String.format("Your registration was successful!");
         }
         catch (DiaryExceptions e){
             return e.getMessage();
@@ -40,7 +39,7 @@ public class DiaryController {
     public String logout(String username){
         try {
             diaryServices.logout(username);
-            return String.format("%s, you are currently logged out!", username);
+            return String.format("you are currently logged out!");
         }
         catch (DiaryExceptions e){
             return e.getMessage();
@@ -52,7 +51,7 @@ public class DiaryController {
     public  String createEntry(@RequestBody CreateEntryRequest createEntry){
         try{
             diaryServices.createEntryWith(createEntry);
-            return String.format("Hello %s, your entry was created successfully", createEntry.getAuthor());
+            return String.format("%s, your entry was created successfully", createEntry.getAuthor());
         }
         catch (DiaryExceptions e){
             return e.getMessage();
@@ -63,7 +62,7 @@ public class DiaryController {
     public  String updateEntry(@RequestBody UpdateEntryRequest updateEntry){
         try{
             diaryServices.updateEntry(updateEntry);
-            return String.format("Hello %s, your entry with id number %d has been created successfully%n", updateEntry.getAuthor(),updateEntry.getId());
+            return String.format("Your entry with id number %d has been created successfully%n");
 
         }
         catch (DiaryExceptions e){
@@ -75,7 +74,7 @@ public class DiaryController {
     public  String deleteEntry(@RequestBody DeleteEntryRequest deleteEntry){
         try{
             diaryServices.deleteEntry(deleteEntry);
-            return String.format("Hello %s, your entry with id number %d has been deleted successfully%n", deleteEntry.getAuthor(), deleteEntry.getId());
+            return String.format("Entry has been deleted successfully%n");
 
         }
         catch (DiaryExceptions e){
@@ -86,7 +85,7 @@ public class DiaryController {
     public  String deleteDiary(@RequestBody DeleteDiaryRequest deleteDiary){
         try{
             diaryServices.deleteDiary(deleteDiary);
-            return String.format("Hello %s, your myDiary.data.models.Diary account with id number %d has been deleted successfully%n", deleteDiary.getAuthor(), deleteDiary.getId());
+            return String.format("Hello, your account has been deleted successfully%n");
 
         }
         catch (DiaryExceptions e){
